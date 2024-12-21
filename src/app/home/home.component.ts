@@ -10,7 +10,7 @@ import { Checklist } from '../shared/interfaces/checklist';
       <button (click)="checklistBeingEdited.set({})">Add Checklist</button>
     </header>
 
-    <app-modal [isOpen]="false">
+    <app-modal [isOpen]="!!checklistBeingEdited()">
       <ng-template>Test</ng-template>
     </app-modal>
   `,
