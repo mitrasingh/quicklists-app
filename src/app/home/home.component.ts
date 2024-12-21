@@ -7,7 +7,7 @@ import { Checklist } from '../shared/interfaces/checklist';
   template: `
     <header>
       <h1>Quicklists</h1>
-      <button>Add Checklist</button>
+      <button (click)="checklistBeingEdited.set({})">Add Checklist</button>
     </header>
 
     <app-modal [isOpen]="false">
