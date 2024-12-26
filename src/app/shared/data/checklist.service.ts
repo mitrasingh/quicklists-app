@@ -1,5 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { Checklist } from '../interfaces/checklist';
+import { AddChecklist, Checklist } from '../interfaces/checklist';
+import { Subject } from 'rxjs';
 
 export interface ChecklistsState {
   checklists: Checklist[];
@@ -16,4 +17,7 @@ export class ChecklistService {
 
   // selector to gain access to state
   checklists = computed(() => this.state().checklists);
+
+  // source which will allow us to emmit into stream
+  add$ = new Subject<AddChecklist>();
 }
