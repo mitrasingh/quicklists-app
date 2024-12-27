@@ -4,12 +4,14 @@ import { Checklist } from '../shared/interfaces/checklist';
 import { FormBuilder } from '@angular/forms';
 import { FormModalComponent } from '../shared/ui/form-modal.component';
 import { ChecklistService } from '../shared/data/checklist.service';
+import { ChecklistList } from './ui/checklist-list.component';
 
 @Component({
   selector: 'app-home',
   template: `
     <header>
       <h1>Quicklists</h1>
+      <app-checklist-list [checklists]="checklistService.checklists()" />
       <button (click)="checklistBeingEdited.set({})">Add Checklist</button>
     </header>
 
@@ -28,7 +30,7 @@ import { ChecklistService } from '../shared/data/checklist.service';
       </ng-template>
     </app-modal>
   `,
-  imports: [ModalComponent, FormModalComponent],
+  imports: [ModalComponent, FormModalComponent, ChecklistList],
 })
 export default class HomeComponent {
   formBuilder = inject(FormBuilder);
