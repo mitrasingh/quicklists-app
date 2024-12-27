@@ -4,10 +4,13 @@ import { Checklist } from '../../shared/interfaces/checklist';
 @Component({
   selector: 'app-checklist-list',
   template: `
-    <h1>Checklist list</h1>
-    @for (checklist of checklists(); track checklist.id) {
-    <p>{{ checklist.title }}</p>
-    }
+    <ul>
+      @for (checklist of checklists(); track checklist.id) {
+      <li>{{ checklist.title }}</li>
+      } @empty {
+      <p>Click the add button to create your first checklist!</p>
+      }
+    </ul>
   `,
 })
 export class ChecklistList {
