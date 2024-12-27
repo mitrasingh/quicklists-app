@@ -3,6 +3,7 @@ import { ModalComponent } from '../shared/ui/modal.component';
 import { Checklist } from '../shared/interfaces/checklist';
 import { FormBuilder } from '@angular/forms';
 import { FormModalComponent } from '../shared/ui/form-modal.component';
+import { ChecklistService } from '../shared/data/checklist.service';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,8 @@ import { FormModalComponent } from '../shared/ui/form-modal.component';
 })
 export default class HomeComponent {
   formBuilder = inject(FormBuilder);
+  checklistService = inject(ChecklistService);
+
   checklistBeingEdited = signal<Partial<Checklist> | null>(null);
 
   checklistForm = this.formBuilder.nonNullable.group({
