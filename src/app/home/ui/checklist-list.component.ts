@@ -5,4 +5,6 @@ import { Checklist } from '../../shared/interfaces/checklist';
   selector: 'app-checklist-list',
   template: `<h1>Checklist list</h1>`,
 })
-export class ChecklistList {}
+export class ChecklistList {
+  checklists = input.required<Checklist[]>();
+}
