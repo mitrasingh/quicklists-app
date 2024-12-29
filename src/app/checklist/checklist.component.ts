@@ -12,4 +12,10 @@ export default class ChecklistComponent {
   route = inject(ActivatedRoute);
 
   params = toSignal(this.route.paramMap);
+
+  checklist = computed(() =>
+    this.checklistService
+      .checklists()
+      .find((checklist) => checklist.id === this.params()?.get('id'))
+  );
 }
