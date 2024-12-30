@@ -3,6 +3,7 @@ import { ChecklistService } from '../shared/data/checklist.service';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ChecklistHeaderComponent } from './ui/checklist-header.component';
+import { ChecklistItemService } from './data/checklist-item.service';
 
 @Component({
   selector: 'app-checklist',
@@ -15,6 +16,8 @@ import { ChecklistHeaderComponent } from './ui/checklist-header.component';
 })
 export default class ChecklistComponent {
   checklistService = inject(ChecklistService);
+  checklistItemService = inject(ChecklistItemService);
+
   route = inject(ActivatedRoute);
 
   params = toSignal(this.route.paramMap);
