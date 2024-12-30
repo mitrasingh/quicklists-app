@@ -5,6 +5,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ChecklistHeaderComponent } from './ui/checklist-header.component';
 import { ChecklistItemService } from './data/checklist-item.service';
 import { ChecklistItem } from '../shared/interfaces/checklist-item';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-checklist',
@@ -18,10 +19,10 @@ import { ChecklistItem } from '../shared/interfaces/checklist-item';
 export default class ChecklistComponent {
   checklistService = inject(ChecklistService);
   checklistItemService = inject(ChecklistItemService);
+  route = inject(ActivatedRoute);
+  formBuilder = inject(FormBuilder);
 
   checklistItemBeingEdited = signal<Partial<ChecklistItem> | null>(null);
-
-  route = inject(ActivatedRoute);
 
   params = toSignal(this.route.paramMap);
 
@@ -30,4 +31,8 @@ export default class ChecklistComponent {
       .checklists()
       .find((checklist) => checklist.id === this.params()?.get('id'))
   );
+
+  checklistItemForm = this.formBuilder.nonNullable.group({
+    title: [''],
+  });
 }
