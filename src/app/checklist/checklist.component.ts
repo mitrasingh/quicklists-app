@@ -1,9 +1,10 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ChecklistService } from '../shared/data/checklist.service';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ChecklistHeaderComponent } from './ui/checklist-header.component';
 import { ChecklistItemService } from './data/checklist-item.service';
+import { ChecklistItem } from '../shared/interfaces/checklist-item';
 
 @Component({
   selector: 'app-checklist',
@@ -17,6 +18,8 @@ import { ChecklistItemService } from './data/checklist-item.service';
 export default class ChecklistComponent {
   checklistService = inject(ChecklistService);
   checklistItemService = inject(ChecklistItemService);
+
+  checklistItemBeingEdited = signal<Partial<ChecklistItem> | null>(null);
 
   route = inject(ActivatedRoute);
 
