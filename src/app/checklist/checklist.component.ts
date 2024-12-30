@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { ChecklistService } from '../shared/data/checklist.service';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -35,4 +35,14 @@ export default class ChecklistComponent {
   checklistItemForm = this.formBuilder.nonNullable.group({
     title: [''],
   });
+
+  constructor() {
+    effect(() => {
+      const checklistItem = this.checklistItemBeingEdited();
+
+      if (!checklistItem) {
+        this.checklistItemForm.reset();
+      }
+    });
+  }
 }
