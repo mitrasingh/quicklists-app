@@ -13,7 +13,10 @@ import { FormModalComponent } from '../shared/ui/form-modal.component';
   selector: 'app-checklist',
   template: `
     @if (checklist(); as checklist) {
-    <app-checklist-header [checklist]="checklist" />
+    <app-checklist-header
+      [checklist]="checklist"
+      (addItem)="checklistItemBeingEdited.set({})"
+    />
     }
     <app-modal [isOpen]="!!checklistItemBeingEdited()">
       <ng-template>
