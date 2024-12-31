@@ -1,5 +1,9 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { AddChecklist, Checklist } from '../interfaces/checklist';
+import {
+  AddChecklist,
+  Checklist,
+  RemoveChecklist,
+} from '../interfaces/checklist';
 import { Subject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -21,6 +25,7 @@ export class ChecklistService {
 
   // source which will allow us to emmit into stream
   add$ = new Subject<AddChecklist>();
+  toggle$ = new Subject<RemoveChecklist>();
 
   constructor() {
     // reducers
