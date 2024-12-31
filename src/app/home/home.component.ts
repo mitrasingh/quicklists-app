@@ -11,9 +11,13 @@ import { ChecklistList } from './ui/checklist-list.component';
   template: `
     <header>
       <h1>Quicklists</h1>
-      <app-checklist-list [checklists]="checklistService.checklists()" />
       <button (click)="checklistBeingEdited.set({})">Add Checklist</button>
     </header>
+
+    <section>
+      <h2>Your checklists</h2>
+      <app-checklist-list [checklists]="checklistService.checklists()" />
+    </section>
 
     <app-modal [isOpen]="!!checklistBeingEdited()">
       <ng-template>
