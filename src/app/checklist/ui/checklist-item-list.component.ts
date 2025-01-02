@@ -12,8 +12,12 @@ import {
         @for (item of checklistItems(); track item.id) {
         <li>
           <div>
+            @if (item.checked) {
+            <span>✅</span>
+            }
             {{ item.title }}
           </div>
+          <div><button (click)="toggle.emit(item.id)">Toggle</button>"</div>
         </li>
         } @empty {
         <div>
