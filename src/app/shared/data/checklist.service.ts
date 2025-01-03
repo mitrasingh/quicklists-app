@@ -25,7 +25,6 @@ export class ChecklistService {
 
   // source which will allow us to emmit into stream
   add$ = new Subject<AddChecklist>();
-  toggle$ = new Subject<RemoveChecklist>();
 
   constructor() {
     // reducers
@@ -35,17 +34,6 @@ export class ChecklistService {
         checklists: [...state.checklists, this.addIdToChecklist(checklist)],
       }))
     );
-
-    this.toggle$.pipe(takeUntilDestroyed()).subscribe((checklistItemId) => {
-      this.state.update((state) => ({
-        ...state,
-        checklistItems: state.checklistItems.map((item) =>
-          item.id === checklistItemId
-            ? { ...item, checked: !item.checked }
-            : item
-        ),
-      }));
-    });
   }
 
   private addIdToChecklist(checklist: AddChecklist) {
