@@ -19,7 +19,10 @@ import { ChecklistItemListComponent } from './ui/checklist-item-list.component';
       (addItem)="checklistItemBeingEdited.set({})"
     />
     }
-    <app-checklist-item-list [checklistItems]="items()" />
+    <app-checklist-item-list
+      [checklistItems]="items()"
+      (toggle)="checklistItemService.toggle$.next($event)"
+    />
     <app-modal [isOpen]="!!checklistItemBeingEdited()">
       <ng-template>
         <app-form-modal
