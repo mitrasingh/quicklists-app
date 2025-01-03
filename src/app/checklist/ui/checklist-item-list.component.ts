@@ -17,7 +17,7 @@ import {
             }
             {{ item.title }}
           </div>
-          <div><button (click)="toggle.emit(item.id)">Toggle</button>"</div>
+          <div><button (click)="toggle.emit(item.id)">Toggle</button></div>
         </li>
         } @empty {
         <div>
