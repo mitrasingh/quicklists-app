@@ -55,11 +55,11 @@ export class ChecklistItemService {
       }))
     );
 
-    this.reset$.pipe(takeUntilDestroyed()).subscribe((checklistItemId) =>
+    this.reset$.pipe(takeUntilDestroyed()).subscribe((checklistId) =>
       this.state.update((state) => ({
         ...state,
         checklistItems: state.checklistItems.map((item) =>
-          item.id === checklistItemId ? { ...item, checked: false } : item
+          item.checklistId === checklistId ? { ...item, checked: false } : item
         ),
       }))
     );
