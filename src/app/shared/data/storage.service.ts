@@ -24,4 +24,11 @@ export class StorageService {
     const checklists = this.storage.getItem('checklists');
     return of(checklists ? (JSON.parse(checklists) as Checklist[]) : []);
   }
+
+  loadChecklistItems() {
+    const checklistItems = this.storage.getItem('checklistItems');
+    return of(
+      checklistItems ? (JSON.parse(checklistsItems) as ChecklistItem[]) : []
+    );
+  }
 }
