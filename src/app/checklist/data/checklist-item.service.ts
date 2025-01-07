@@ -37,6 +37,7 @@ export class ChecklistItemService {
   reset$ = new Subject<RemoveChecklist>();
 
   constructor() {
+    // reducers
     this.add$.pipe(takeUntilDestroyed()).subscribe((checklistItem) =>
       this.state.update((state) => ({
         ...state,
@@ -71,5 +72,15 @@ export class ChecklistItemService {
         ),
       }))
     );
+
+    this.checklistItemsLoaded$.pipe(takeUntilDestroyed()).subscribe({
+      next: (checklistItem) =>
+        this.state.update((state) => ({
+          ...state,
+          checklistItem,
+          loaded: true,
+        })),
+      error: (err) => this.state.update((state) => ({ ...state, error: err })),
+    });
   }
 }
