@@ -38,6 +38,13 @@ export class ChecklistService {
         checklists: [...state.checklists, this.addIdToChecklist(checklist)],
       }))
     );
+
+    this.checklistsLoaded$.pipe(takeUntilDestroyed()).subscribe((checklists) =>
+      this.state.update((state) => ({
+        ...state,
+        checklists,
+      }))
+    );
   }
 
   private addIdToChecklist(checklist: AddChecklist) {
