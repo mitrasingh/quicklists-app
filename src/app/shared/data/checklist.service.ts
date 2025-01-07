@@ -43,12 +43,14 @@ export class ChecklistService {
       }))
     );
 
-    this.checklistsLoaded$.pipe(takeUntilDestroyed()).subscribe((checklists) =>
-      this.state.update((state) => ({
-        ...state,
-        checklists,
-      }))
-    );
+    this.checklistsLoaded$.pipe(takeUntilDestroyed()).subscribe({
+      next: (checklists) =>
+        this.state.update((state) => ({
+          ...state,
+          checklists,
+        })),
+      error: (err) => this.state.update((state) => ({ ...state, error: err })),
+    });
   }
 
   private addIdToChecklist(checklist: AddChecklist) {
