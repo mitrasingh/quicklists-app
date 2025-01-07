@@ -10,6 +10,8 @@ import { StorageService } from '../../shared/data/storage.service';
 
 export interface ChecklistItemsState {
   checklistItems: ChecklistItem[];
+  loaded: boolean;
+  error: string | null;
 }
 
 @Injectable({
@@ -21,6 +23,8 @@ export class ChecklistItemService {
   // state
   private state = signal<ChecklistItemsState>({
     checklistItems: [],
+    loaded: false,
+    error: null,
   });
 
   // selectors
