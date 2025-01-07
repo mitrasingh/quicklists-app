@@ -1,4 +1,4 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import {
   AddChecklistItem,
   ChecklistItem,
@@ -6,6 +6,7 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RemoveChecklist } from '../../shared/interfaces/checklist';
+import { StorageService } from '../../shared/data/storage.service';
 
 export interface ChecklistItemsState {
   checklistItems: ChecklistItem[];
@@ -15,6 +16,8 @@ export interface ChecklistItemsState {
   providedIn: 'root',
 })
 export class ChecklistItemService {
+  storageService = inject(StorageService);
+
   // state
   private state = signal<ChecklistItemsState>({
     checklistItems: [],
@@ -24,6 +27,7 @@ export class ChecklistItemService {
   checklistItems = computed(() => this.state().checklistItems);
 
   // sources
+  private checklistItemsLoaded$ = this.storageService.loadChecklistItems();
   add$ = new Subject<AddChecklistItem>();
   toggle$ = new Subject<RemoveChecklist>();
   reset$ = new Subject<RemoveChecklist>();
