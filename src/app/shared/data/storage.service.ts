@@ -1,6 +1,7 @@
 import { inject, Injectable, InjectionToken, PLATFORM_ID } from '@angular/core';
 import { Checklist } from '../interfaces/checklist';
 import { of } from 'rxjs';
+import { ChecklistItem } from '../interfaces/checklist-item';
 
 export const LOCAL_STORAGE = new InjectionToken<Storage>(
   'window local storage object',
@@ -20,6 +21,7 @@ export const LOCAL_STORAGE = new InjectionToken<Storage>(
 export class StorageService {
   storage = inject(LOCAL_STORAGE);
 
+  // load methods
   loadChecklists() {
     const checklists = this.storage.getItem('checklists');
     return of(checklists ? (JSON.parse(checklists) as Checklist[]) : []);
@@ -28,7 +30,16 @@ export class StorageService {
   loadChecklistItems() {
     const checklistItems = this.storage.getItem('checklistItems');
     return of(
-      checklistItems ? (JSON.parse(checklistsItems) as ChecklistItem[]) : []
+      checklistItems ? (JSON.parse(checklistItems) as ChecklistItem[]) : []
     );
+  }
+
+  // save methods
+  saveChecklists(checklists: Checklist[]) {
+    this.storage.setItem('checklists', JSON.stringify(checklists));
+  }
+
+  saveChecklistItems(checklistItems: ChecklistItem[]) {
+    this.storage.setItem('checklistItems', JSON.stringify(checklistItems));
   }
 }
