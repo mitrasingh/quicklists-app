@@ -1,4 +1,4 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import {
   AddChecklist,
   Checklist,
@@ -6,6 +6,7 @@ import {
 } from '../interfaces/checklist';
 import { Subject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { StorageService } from './storage.service';
 
 export interface ChecklistsState {
   checklists: Checklist[];
@@ -15,6 +16,8 @@ export interface ChecklistsState {
   providedIn: 'root',
 })
 export class ChecklistService {
+  storageService = inject(StorageService);
+
   // state for checklists
   private state = signal<ChecklistsState>({
     checklists: [],
@@ -24,6 +27,7 @@ export class ChecklistService {
   checklists = computed(() => this.state().checklists);
 
   // source which will allow us to emmit into stream
+  private checklistsLoaded$ = this.storageService.loadChecklists();
   add$ = new Subject<AddChecklist>();
 
   constructor() {
