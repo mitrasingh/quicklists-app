@@ -10,6 +10,8 @@ import { StorageService } from './storage.service';
 
 export interface ChecklistsState {
   checklists: Checklist[];
+  loaded: boolean;
+  error: string | null;
 }
 
 @Injectable({
@@ -21,6 +23,8 @@ export class ChecklistService {
   // state for checklists
   private state = signal<ChecklistsState>({
     checklists: [],
+    loaded: false,
+    error: null,
   });
 
   // selector to gain access to state
