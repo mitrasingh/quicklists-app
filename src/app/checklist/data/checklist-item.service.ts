@@ -34,6 +34,7 @@ export class ChecklistItemService {
   // sources
   private checklistItemsLoaded$ = this.storageService.loadChecklistItems();
   add$ = new Subject<AddChecklistItem>();
+  delete$ = new Subject<RemoveChecklist>();
   toggle$ = new Subject<RemoveChecklist>();
   reset$ = new Subject<RemoveChecklist>();
 
