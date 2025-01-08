@@ -13,7 +13,6 @@ export interface ChecklistItemsState {
   loaded: boolean;
   error: string | null;
 }
-
 @Injectable({
   providedIn: 'root',
 })
@@ -58,6 +57,15 @@ export class ChecklistItemService {
             checked: false,
           },
         ],
+      }))
+    );
+
+    this.delete$.pipe(takeUntilDestroyed()).subscribe((checklistItemId) =>
+      this.state.update((state) => ({
+        ...state,
+        checklistItems: state.checklistItems.filter(
+          (item) => item.id !== checklistItemId
+        ),
       }))
     );
 
