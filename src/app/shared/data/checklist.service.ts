@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { AddChecklist, Checklist } from '../interfaces/checklist';
 import { Subject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -25,12 +25,19 @@ export class ChecklistService {
 
   // selector to gain access to state
   checklists = computed(() => this.state().checklists);
+  loaded = computed(() => this.state().loaded);
 
   // source which will allow us to emmit into stream
   private checklistsLoaded$ = this.storageService.loadChecklists();
   add$ = new Subject<AddChecklist>();
 
   constructor() {
+    effect(() => {
+      if (this.loaded()) {
+        this.storageService.saveChecklists(this.checklists());
+      }
+    });
+
     // reducers
     this.add$.pipe(takeUntilDestroyed()).subscribe((checklist) =>
       this.state.update((state) => ({
