@@ -81,10 +81,10 @@ export class ChecklistItemService {
     );
 
     this.checklistItemsLoaded$.pipe(takeUntilDestroyed()).subscribe({
-      next: (checklistItem) =>
+      next: (checklistItems) =>
         this.state.update((state) => ({
           ...state,
-          checklistItem,
+          checklistItems,
           loaded: true,
         })),
       error: (err) => this.state.update((state) => ({ ...state, error: err })),
