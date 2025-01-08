@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import {
   AddChecklistItem,
   ChecklistItem,
@@ -29,6 +29,7 @@ export class ChecklistItemService {
 
   // selectors
   checklistItems = computed(() => this.state().checklistItems);
+  loaded = computed(() => this.state().loaded);
 
   // sources
   private checklistItemsLoaded$ = this.storageService.loadChecklistItems();
@@ -37,6 +38,12 @@ export class ChecklistItemService {
   reset$ = new Subject<RemoveChecklist>();
 
   constructor() {
+    effect(() => {
+      if (this.loaded()) {
+        this.storageService.saveChecklistItems(this.checklistItems());
+      }
+    });
+
     // reducers
     this.add$.pipe(takeUntilDestroyed()).subscribe((checklistItem) =>
       this.state.update((state) => ({
