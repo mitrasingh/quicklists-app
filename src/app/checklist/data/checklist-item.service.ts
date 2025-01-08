@@ -34,7 +34,7 @@ export class ChecklistItemService {
   // sources
   private checklistItemsLoaded$ = this.storageService.loadChecklistItems();
   add$ = new Subject<AddChecklistItem>();
-  delete$ = new Subject<RemoveChecklist>();
+  remove$ = new Subject<RemoveChecklist>();
   edit$ = new Subject<EditChecklistItem>();
   toggle$ = new Subject<RemoveChecklist>();
   reset$ = new Subject<RemoveChecklist>();
@@ -62,7 +62,7 @@ export class ChecklistItemService {
       }))
     );
 
-    this.delete$.pipe(takeUntilDestroyed()).subscribe((checklistItemId) =>
+    this.remove$.pipe(takeUntilDestroyed()).subscribe((checklistItemId) =>
       this.state.update((state) => ({
         ...state,
         checklistItems: state.checklistItems.filter(
