@@ -44,6 +44,7 @@ export class ChecklistService {
         this.state.update((state) => ({
           ...state,
           checklists,
+          loaded: true,
         })),
       error: (err) => this.state.update((state) => ({ ...state, error: err })),
     });
