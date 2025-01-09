@@ -110,5 +110,14 @@ export class ChecklistItemService {
         })),
       error: (err) => this.state.update((state) => ({ ...state, error: err })),
     });
+
+    this.checklistRemoved$.pipe(takeUntilDestroyed()).subscribe((checklistId) =>
+      this.state.update((state) => ({
+        ...state,
+        checklistItems: state.checklistItems.filter(
+          (item) => item.checklistId !== checklistId
+        ),
+      }))
+    );
   }
 }
