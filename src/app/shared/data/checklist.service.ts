@@ -65,6 +65,13 @@ export class ChecklistService {
       }))
     );
 
+    this.remove$.pipe(takeUntilDestroyed()).subscribe((id) =>
+      this.state.update((state) => ({
+        ...state,
+        checklists: state.checklists.filter((checklist) => checklist.id !== id),
+      }))
+    );
+
     this.checklistsLoaded$.pipe(takeUntilDestroyed()).subscribe({
       next: (checklists) =>
         this.state.update((state) => ({
