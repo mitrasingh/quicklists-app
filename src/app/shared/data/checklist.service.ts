@@ -1,5 +1,9 @@
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
-import { AddChecklist, Checklist } from '../interfaces/checklist';
+import {
+  AddChecklist,
+  Checklist,
+  EditChecklist,
+} from '../interfaces/checklist';
 import { Subject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { StorageService } from './storage.service';
@@ -32,6 +36,7 @@ export class ChecklistService {
   // source which will allow us to emmit into stream
   private checklistsLoaded$ = this.storageService.loadChecklists();
   add$ = new Subject<AddChecklist>();
+  edit$ = new Subject<EditChecklist>();
   remove$ = this.checklistItemService.checklistRemoved$;
 
   constructor() {
