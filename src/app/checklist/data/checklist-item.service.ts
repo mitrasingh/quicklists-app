@@ -38,6 +38,7 @@ export class ChecklistItemService {
   edit$ = new Subject<EditChecklistItem>();
   toggle$ = new Subject<RemoveChecklist>();
   reset$ = new Subject<RemoveChecklist>();
+  checklistRemoved$ = new Subject<RemoveChecklist>();
 
   constructor() {
     effect(() => {
