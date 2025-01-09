@@ -3,6 +3,7 @@ import { AddChecklist, Checklist } from '../interfaces/checklist';
 import { Subject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { StorageService } from './storage.service';
+import { ChecklistItemService } from '../../checklist/data/checklist-item.service';
 
 export interface ChecklistsState {
   checklists: Checklist[];
@@ -15,6 +16,7 @@ export interface ChecklistsState {
 })
 export class ChecklistService {
   storageService = inject(StorageService);
+  checklistItemService = inject(ChecklistItemService);
 
   // state for checklists
   private state = signal<ChecklistsState>({
@@ -30,6 +32,7 @@ export class ChecklistService {
   // source which will allow us to emmit into stream
   private checklistsLoaded$ = this.storageService.loadChecklists();
   add$ = new Subject<AddChecklist>();
+  remove$ = this.checklistItemService.checklistRemoved$;
 
   constructor() {
     effect(() => {
