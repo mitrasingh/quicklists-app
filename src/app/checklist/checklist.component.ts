@@ -16,7 +16,6 @@ import { FormBuilder } from '@angular/forms';
 import { ModalComponent } from '../shared/ui/modal.component';
 import { FormModalComponent } from '../shared/ui/form-modal.component';
 import { ChecklistItemListComponent } from './ui/checklist-item-list.component';
-import { RemoveChecklist } from '../shared/interfaces/checklist';
 
 @Component({
   selector: 'app-checklist',
@@ -59,8 +58,6 @@ export default class ChecklistComponent {
   checklistItemService = inject(ChecklistItemService);
   route = inject(ActivatedRoute);
   formBuilder = inject(FormBuilder);
-
-  delete = output<RemoveChecklist>();
 
   checklistItemBeingEdited = signal<Partial<ChecklistItem> | null>(null);
 
