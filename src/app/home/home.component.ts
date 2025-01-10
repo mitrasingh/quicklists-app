@@ -19,6 +19,7 @@ import { ChecklistList } from './ui/checklist-list.component';
       <app-checklist-list
         [checklists]="checklistService.checklists()"
         (delete)="checklistService.remove$.next($event)"
+        (edit)="checklistBeingEdited.set($event)"
       />
     </section>
 
