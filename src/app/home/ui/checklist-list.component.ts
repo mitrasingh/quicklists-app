@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
         <a routerLink="/checklist/{{ checklist.id }}">{{ checklist.title }}</a>
         <div>
           <button (click)="edit.emit(checklist)">Edit</button>
-          <button (click)="delete.emit(checklist.id)">Edit</button>
+          <button (click)="delete.emit(checklist.id)">Delete</button>
         </div>
       </li>
       } @empty {
