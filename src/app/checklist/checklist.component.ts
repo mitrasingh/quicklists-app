@@ -1,4 +1,11 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  output,
+  signal,
+} from '@angular/core';
 import { ChecklistService } from '../shared/data/checklist.service';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -9,6 +16,7 @@ import { FormBuilder } from '@angular/forms';
 import { ModalComponent } from '../shared/ui/modal.component';
 import { FormModalComponent } from '../shared/ui/form-modal.component';
 import { ChecklistItemListComponent } from './ui/checklist-item-list.component';
+import { RemoveChecklist } from '../shared/interfaces/checklist';
 
 @Component({
   selector: 'app-checklist',
@@ -51,6 +59,8 @@ export default class ChecklistComponent {
   checklistItemService = inject(ChecklistItemService);
   route = inject(ActivatedRoute);
   formBuilder = inject(FormBuilder);
+
+  delete = output<RemoveChecklist>();
 
   checklistItemBeingEdited = signal<Partial<ChecklistItem> | null>(null);
 
