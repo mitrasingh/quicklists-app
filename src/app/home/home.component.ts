@@ -55,6 +55,10 @@ export default class HomeComponent {
       const checklist = this.checklistBeingEdited();
       if (!checklist) {
         this.checklistForm.reset();
+      } else {
+        this.checklistForm.patchValue({
+          title: checklist.title,
+        });
       }
     });
   }
