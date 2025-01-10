@@ -16,7 +16,10 @@ import { ChecklistList } from './ui/checklist-list.component';
 
     <section>
       <h2>Your checklists</h2>
-      <app-checklist-list [checklists]="checklistService.checklists()" />
+      <app-checklist-list
+        [checklists]="checklistService.checklists()"
+        (delete)="checklistService.remove$.next($event)"
+      />
     </section>
 
     <app-modal [isOpen]="!!checklistBeingEdited()">
