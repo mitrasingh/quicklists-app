@@ -1,5 +1,5 @@
-import { Component, input } from '@angular/core';
-import { Checklist } from '../../shared/interfaces/checklist';
+import { Component, input, output } from '@angular/core';
+import { Checklist, RemoveChecklist } from '../../shared/interfaces/checklist';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -19,4 +19,6 @@ import { RouterLink } from '@angular/router';
 })
 export class ChecklistList {
   checklists = input.required<Checklist[]>();
+  delete = output<RemoveChecklist>();
+  edit = output<Checklist>();
 }
