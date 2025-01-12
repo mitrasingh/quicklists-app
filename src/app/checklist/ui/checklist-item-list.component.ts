@@ -32,4 +32,5 @@ import {
 export class ChecklistItemListComponent {
   checklistItems = input.required<ChecklistItem[]>();
   toggle = output<RemoveChecklistItem>();
+  delete = output<RemoveChecklistItem>();
 }
