@@ -21,6 +21,7 @@ import {
           <div>
             <button (click)="toggle.emit(item.id)">Toggle</button>
             <button (click)="delete.emit(item.id)">Delete</button>
+            <button (click)="edit.emit(item)">Edit</button>
           </div>
         </li>
         } @empty {
