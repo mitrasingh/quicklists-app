@@ -18,7 +18,10 @@ import {
             }
             {{ item.title }}
           </div>
-          <div><button (click)="toggle.emit(item.id)">Toggle</button></div>
+          <div>
+            <button (click)="toggle.emit(item.id)">Toggle</button>
+            <button (click)="delete.emit(item.id)">Delete</button>
+          </div>
         </li>
         } @empty {
         <div>
