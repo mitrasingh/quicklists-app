@@ -33,7 +33,10 @@ import { ChecklistList } from './ui/checklist-list.component';
           "
           [formGroup]="checklistForm"
           (close)="checklistBeingEdited.set(null)"
-          (save)="checklistService.add$.next(checklistForm.getRawValue())"
+          (save)="checklistBeingEdited()?.id ? checklistService.edit$.next({
+            id: checklistBeingEdited()!.id!,
+            data: checklistForm.getRawValue(),
+          }) : checklistService.add$.next(checklistForm.getRawValue())"
         />
       </ng-template>
     </app-modal>
