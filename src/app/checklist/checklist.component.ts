@@ -38,7 +38,13 @@ import { ChecklistItemListComponent } from './ui/checklist-item-list.component';
         <app-form-modal
           title="Create item"
           [formGroup]="checklistItemForm"
-          (save)="checklistItemService.add$.next({
+          (save)="checklistItemBeingEdited()?.id ? 
+            checklistItemService.edit$.next({ 
+              id: checklistItemBeingEdited()!.id!, 
+              data: checklistItemForm.getRawValue() 
+            }) 
+          :
+            checklistItemService.add$.next({
             item: checklistItemForm.getRawValue(),
             checklistId: checklist()?.id!,
           })"
