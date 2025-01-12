@@ -37,7 +37,7 @@ export class ChecklistItemService {
   add$ = new Subject<AddChecklistItem>();
   remove$ = new Subject<RemoveChecklistItem>();
   edit$ = new Subject<EditChecklistItem>();
-  toggle$ = new Subject<RemoveChecklist>();
+  toggle$ = new Subject<RemoveChecklistItem>();
   reset$ = new Subject<RemoveChecklist>();
   checklistRemoved$ = new Subject<RemoveChecklist>();
 
