@@ -50,7 +50,10 @@ export class ChecklistService {
     this.add$.pipe(takeUntilDestroyed()).subscribe((checklist) =>
       this.state.update((state) => ({
         ...state,
-        checklists: [...state.checklists, this.addIdToChecklist(checklist)],
+        checklists: [
+          ...state.checklists,
+          this.addIdAndDateToChecklist(checklist),
+        ],
       }))
     );
 
@@ -59,7 +62,10 @@ export class ChecklistService {
         ...state,
         checklists: state.checklists.map((checklist) =>
           checklist.id === update.id
-            ? { ...checklist, title: update.data.title }
+            ? {
+                ...checklist,
+                title: update.data.title,
+              }
             : checklist
         ),
       }))
@@ -83,10 +89,15 @@ export class ChecklistService {
     });
   }
 
-  private addIdToChecklist(checklist: AddChecklist) {
+  private addIdAndDateToChecklist(checklist: AddChecklist) {
     return {
       ...checklist,
       id: this.generateSlug(checklist.title),
+      date: new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }),
     };
   }
 
