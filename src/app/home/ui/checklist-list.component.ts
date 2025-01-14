@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
       @for (checklist of checklists(); track checklist.id) {
       <li>
         <a routerLink="/checklist/{{ checklist.id }}">{{ checklist.title }}</a>
+        <span>{{ checklist.date }}</span>
         <div>
           <button (click)="edit.emit(checklist)">Edit</button>
           <button (click)="delete.emit(checklist.id)">Delete</button>
