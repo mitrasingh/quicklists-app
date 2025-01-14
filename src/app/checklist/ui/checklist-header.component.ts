@@ -8,6 +8,7 @@ import { Checklist, RemoveChecklist } from '../../shared/interfaces/checklist';
     <header>
       <a routerLink="/home">Back</a>
       <h1>{{ checklist().title }}</h1>
+      <p>Created on {{ checklist().date }}</p>
       <button (click)="resetChecklist.emit(checklist().id)">
         Reset checklist
       </button>
