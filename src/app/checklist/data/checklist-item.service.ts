@@ -31,6 +31,7 @@ export class ChecklistItemService {
   // selectors
   checklistItems = computed(() => this.state().checklistItems);
   loaded = computed(() => this.state().loaded);
+  checklistItemsLength = computed(() => this.state().checklistItems.length);
 
   // sources
   private checklistItemsLoaded$ = this.storageService.loadChecklistItems();
