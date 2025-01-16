@@ -40,6 +40,9 @@ import { ChecklistItem } from '../../shared/interfaces/checklist-item';
         button {
           margin-left: 1rem;
         }
+        span {
+          font-size: 0.65em;
+        }
       }
     `,
   ],
