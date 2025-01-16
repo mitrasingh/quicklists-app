@@ -19,6 +19,7 @@ import { ChecklistItemService } from '../checklist/data/checklist-item.service';
       <h2>Your checklists</h2>
       <app-checklist-list
         [checklists]="checklistService.checklists()"
+        [checklistItemCount]="checklistItemService.checklistItemsLength()"
         (delete)="checklistService.remove$.next($event)"
         (edit)="checklistBeingEdited.set($event)"
       />
