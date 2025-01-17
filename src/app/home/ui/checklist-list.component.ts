@@ -1,7 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { Checklist, RemoveChecklist } from '../../shared/interfaces/checklist';
 import { RouterLink } from '@angular/router';
-import { ChecklistItem } from '../../shared/interfaces/checklist-item';
 
 @Component({
   selector: 'app-checklist-list',
