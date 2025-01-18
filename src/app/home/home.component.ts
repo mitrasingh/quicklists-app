@@ -19,7 +19,7 @@ import { ChecklistItemService } from '../checklist/data/checklist-item.service';
       <h2>Your checklists</h2>
       <app-checklist-list
         [checklists]="checklistService.checklists()"
-        [checklistItemCount]="checklistItemService.checklistItemsLength()"
+        [checklistItemCount]="checklistItemService.checklistItems()"
         (delete)="checklistService.remove$.next($event)"
         (edit)="checklistBeingEdited.set($event)"
       />
@@ -66,6 +66,7 @@ export default class HomeComponent {
           title: checklist.title,
         });
       }
+      console.log(this.checklistItemService.checklistItems());
     });
   }
 }
