@@ -60,17 +60,17 @@ import { ChecklistItem } from '../../shared/interfaces/checklist-item';
 })
 export class ChecklistList {
   checklists = input.required<Checklist[]>();
-  checklistItemCount = input.required<ChecklistItem[]>();
+  checklistItems = input.required<ChecklistItem[]>();
   delete = output<RemoveChecklist>();
   edit = output<Checklist>();
 
   getItemCount(checklistId: string): number {
-    return this.checklistItemCount().filter(
+    return this.checklistItems().filter(
       (item) => item.checklistId === checklistId
     ).length;
   }
   getCheckedItemCount(checklistId: string): number {
-    return this.checklistItemCount().filter(
+    return this.checklistItems().filter(
       (item) => item.checklistId === checklistId && item.checked
     ).length;
   }
