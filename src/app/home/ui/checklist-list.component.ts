@@ -1,4 +1,11 @@
-import { Component, input, output, effect } from '@angular/core';
+import {
+  Component,
+  input,
+  output,
+  effect,
+  computed,
+  signal,
+} from '@angular/core';
 import { Checklist, RemoveChecklist } from '../../shared/interfaces/checklist';
 import { RouterLink } from '@angular/router';
 import { ChecklistItem } from '../../shared/interfaces/checklist-item';
@@ -10,7 +17,10 @@ import { ChecklistItem } from '../../shared/interfaces/checklist-item';
       @for (checklist of checklists(); track checklist.id) {
       <li>
         <a routerLink="/checklist/{{ checklist.id }}">{{ checklist.title }}</a>
-        <span>{{ checklistItemCount().length }} items</span>
+        <span
+          >{{ getCheckedItemCount(checklist.id) }} /
+          {{ getItemCount(checklist.id) }} items are done</span
+        >
         <span>{{ checklist.date }}</span>
         <div>
           <button (click)="edit.emit(checklist)">Edit</button>
@@ -54,9 +64,14 @@ export class ChecklistList {
   delete = output<RemoveChecklist>();
   edit = output<Checklist>();
 
-  constructor() {
-    effect(() => {
-      console.log(this.checklists());
-    });
+  getItemCount(checklistId: string): number {
+    return this.checklistItemCount().filter(
+      (item) => item.checklistId === checklistId
+    ).length;
+  }
+  getCheckedItemCount(checklistId: string): number {
+    return this.checklistItemCount().filter(
+      (item) => item.checklistId === checklistId && item.checked
+    ).length;
   }
 }
